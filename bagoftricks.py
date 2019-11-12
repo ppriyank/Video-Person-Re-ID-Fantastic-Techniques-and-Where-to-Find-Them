@@ -126,13 +126,26 @@ galleryloader = DataLoader(
     batch_size=args.test_batch, shuffle=False, num_workers=args.workers,
     pin_memory=pin_memory, drop_last=False,
 )
+if args.dataset == "mars":
+    print("USING MARS CONFIG")
+    sigma =  0.9047814732165316
+    alpha =  2.8436551583293728
+    l =  0.5873389293193368
+    margin =  4.4132437486402204e-05
+    beta_ratio =  1.0
+    gamma =  0.3282654557691594
+    weight_decay = 0.0005
+elif args.dataset == "prid":
+    print("USING PRID CONFIG")
+    sigma= 0.8769823511927456
+    alpha= 1.5747007053351507
+    l= 0.5241677630566622
+    margin= 0.040520629258433416
+    beta_ratio= 0.7103921571238655
+    gamma= 0.368667605025003
+    weight_decay= 0.014055481861393148
 
-sigma =  0.9047814732165316
-alpha =  2.8436551583293728
-l =  0.5873389293193368
-margin =  4.4132437486402204e-05
-beta_ratio =  1.0
-gamma =  0.3282654557691594
+
 
 args.arch = "ResNet50ta_bt"
 model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids, loss={'xent', 'htri'})
@@ -162,7 +175,6 @@ for key, value in model.named_parameters():
     if not value.requires_grad:
         continue
     lr = base_learning_rate
-    weight_decay = 0.0005
     params += [{"params": [value], "lr": lr, "weight_decay": weight_decay}]
 
 
@@ -355,6 +367,7 @@ else:
                         }, is_best, osp.join(args.save_dir, args.arch + '_checkpoint_ep' + str(epoch+1) + '.pth.tar'))                
 
 
+# python bagoftricks.py -d="prid" --name="_prid_CL_CENTERS_" --validation-training --cl-centers --print-freq=10
 # python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers
 # python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA
 # python bagoftricks.py --name="_triplet_only_" --validation-training 
