@@ -11,3 +11,15 @@ Extension of Work done for Videos
 * [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline)
 * [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch)
 
+
+
+
+## bag of tricks   
+`args.arch = "ResNet50ta_bt"`
+
+`python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers`  
+`python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA`  
+`python bagoftricks.py --name="_triplet_only_" --validation-training`   
+`python bagoftricks.py --name="_ilidsvid_" --validation-training`   
+`python bagoftricks.py --name="_prid_" --validation-training`   
+
