@@ -25,7 +25,7 @@ Extension of Work done for Videos
 
 ## hyper parameter optimization   
 
-`# python hyper_supervise_validation.py --focus="map" >> ~/code/Video-Person-ReID-master/outputs/hyper_val_rand_map.out`    
-`# python hyper_supervise_validation.py --focus="rerank_map" >> ~/code/Video-Person-ReID-master/outputs/hyper_val_rand_rerank_map.out`   
-`python hyper_supervise_validation.py --focus="map" --sampling="inteliigi">> ~/code/Video-Person-ReID-master/outputs/hyper_val_inteliigi_map.out`    
-`# python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi">> ~/code/Video-Person-ReID-master/outputs/hyper_val_inteliigi_rerank_map.out`  
+`# python hyper_supervise_validation.py --focus="map"`       
+`# python hyper_supervise_validation.py --focus="rerank_map" `      
+`python hyper_supervise_validation.py --focus="map" --sampling="inteliigi"`      
+`# python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi"`    
