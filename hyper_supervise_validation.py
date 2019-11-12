@@ -85,9 +85,9 @@ def train_model(model, criterion_xent, criterion_htri, optimizer, trainloader, u
     model.train()
     losses = AverageMeter()
     cetner_loss_weight = 0.0005
-    for batch_idx, (imgs, pids, _, labels) in enumerate(trainloader):
+    for batch_idx, (imgs, pids, _) in enumerate(trainloader):
         if use_gpu:
-            imgs, pids  , labels = imgs.cuda(), pids.cuda() , labels.cuda().float()
+            imgs, pids   = imgs.cuda(), pids.cuda() 
         imgs, pids = Variable(imgs), Variable(pids)
         outputs, features  = model(imgs)
         ide_loss = criterion_xent(outputs , pids)
@@ -151,7 +151,7 @@ def train(parameters: Dict[str, float]) -> nn.Module:
     num_instances = 4
     pin_memory = True
     trainloader = DataLoader(
-    VideoDataset_inderase(dataset.train, seq_len=args.seq_len, sample='random',transform=transform_train),
+    VideoDataset(dataset.train, seq_len=args.seq_len, sample='random',transform=transform_train),
     sampler=RandomIdentitySampler(dataset.train, num_instances=args.num_instances),
     batch_size=batch_size, num_workers=args.workers,
     pin_memory=pin_memory, drop_last=True,
@@ -179,7 +179,7 @@ def train(parameters: Dict[str, float]) -> nn.Module:
     criterion_xent = CrossEntropyLabelSmooth(dataset.num_train_pids)
     criterion_center_loss = CenterLoss(use_gpu=1)
     criterion_osm_caa = OSM_CAA_Loss(alpha=alpha , l=l , osm_sigma=sigma )
-    args.arch = "ResNet50ta_bt2"
+    args.arch = "ResNet50ta_bt"
     model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids, loss={'xent', 'htri'})
     if use_gpu:
         model = nn.DataParallel(model).cuda()
