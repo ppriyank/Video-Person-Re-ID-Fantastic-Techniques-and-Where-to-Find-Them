@@ -28,12 +28,13 @@ Extension of Work done for Videos
 | Baseline + BOT + OSM Loss    |  |   |   |   |
 | Baseline + BOT + OSM Loss + CL Centers    |    |   |   |  |
 
-**PRID DATASET** 
+**PRID DATASET**   
+
 | Model            | mAP |CMC-1 | CMC-5 | CMC-20 |
 | :--------------- | ----------: | ----------: | ----------: | ----------: | 
 | SOTA       |  93.2%  | -  | -  |  -   |
 | Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
-| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |    |   |   |  |
+| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  -  | -  | -  | -  |
  
 
 
