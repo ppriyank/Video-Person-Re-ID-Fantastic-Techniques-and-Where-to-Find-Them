@@ -19,7 +19,7 @@ Extension of Work done for Videos
 
 **MARS DATASET** 
 
-| Model            | mAP |CMC-1 | CMC-5 | CMC-20 |
+| Model            | mAP (re-rank) |CMC-1 (re-rank) | CMC-5 (re-rank)| CMC-20 (re-rank)|
 | :--------------- | ----------: | ----------: | ----------: | ----------: | 
 | SOTA (w/o re-rank)      |   80.8  | 86.3 | 95.7 | 98.1   |
 | SOTA (w/o re-rank)    |   87.7  | 87.2 | 96.2 | 98.6 |
