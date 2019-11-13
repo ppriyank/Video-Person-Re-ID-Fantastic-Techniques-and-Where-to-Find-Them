@@ -21,13 +21,20 @@ Extension of Work done for Videos
 
 | Model            | mAP |CMC-1 | CMC-5 | CMC-20 |
 | :--------------- | ----------: | ----------: | ----------: | ----------: | 
-| SOTA (w/ re-rank)      |   80.8  | 86.3 | 95.7 | 98.1   |
-| SOTA (w/o re-rank)    |   75.8  | 83.1 | 92.8 | 95.3 |
-| Baseline     |  76.7 | 83.3 | 93.8 | 96.0 |
-| Baseline + BOT    |   73.9 | 81.6 | 92.8 | 94.7 |
-| Baseline + BOT + OSM Loss    |  70.5 | 78.5 | 90.9 | 93.9 |
-| Baseline + BOT + OSM Loss + CL Centers    |  70.5 | 78.5 | 90.9 | 93.9 |
+| SOTA (w/o re-rank)      |   80.8  | 86.3 | 95.7 | 98.1   |
+| SOTA (w/o re-rank)    |   87.7  | 87.2 | 96.2 | 98.6 |
+| Baseline     |  76.7 (84.5) | 83.3 (85.0) | 93.8 (94.7) | 97.4 (97.7)|
+| Baseline + BOT    |    81.3 (88.4) | 87.1 (87.6) | 95.9 (96.0) | 98.2 (98.4) |
+| Baseline + BOT + OSM Loss    |  |   |   |   |
+| Baseline + BOT + OSM Loss + CL Centers    |    |   |   |  |
 
+**PRID DATASET** 
+| Model            | mAP |CMC-1 | CMC-5 | CMC-20 |
+| :--------------- | ----------: | ----------: | ----------: | ----------: | 
+| SOTA       |  93.2%  | -  | -  |  -   |
+| Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
+| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |    |   |   |  |
+ 
 
 
 ## MODEL
@@ -60,3 +67,11 @@ MARS dataset:
 `python hyper_supervise_validation.py --focus="rerank_map" `      
 `python hyper_supervise_validation.py --focus="map" --sampling="inteliigi"`      
 `python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi"`    
+
+
+
+Ref: 
+
+* STA: Spatial-Temporal Attention for Large-Scale Video-Based Person Re-Identification
+* Diversity Regularized Spatiotemporal Attention for Video-based Person Re-identification
+
