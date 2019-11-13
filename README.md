@@ -15,11 +15,17 @@ Extension of Work done for Videos
 
 ## RESULTS
 
+### LOSS
+
+```
+loss = ide_loss + (1 - beta_ratio)*triplet_loss + center_loss * cetner_loss_weight + beta_ratio * osm_caa_loss
+```
+
 ### Performance
 
 **MARS DATASET** 
 
-| Model            | mAP (re-rank) |CMC-1 (re-rank) | CMC-5 (re-rank)| CMC-20 (re-rank)|
+| Model            | mAP (re-rank)  | CMC-1 (re-rank) | CMC-5 (re-rank)| CMC-20 (re-rank)|
 | :--------------- | -------------: | -------------: | -------------: | ------------: | 
 | SOTA (w/o re-rank)      |   80.8  | 86.3 | 95.7 | 98.1   |
 | SOTA (w/o re-rank)    |   87.7  | 87.2 | 96.2 | 98.6 |

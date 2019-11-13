@@ -28,6 +28,6 @@ cd /home/pp1953/code/official
 # python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset" --sampling="intelligent" >> ~/code/temp/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them-master/output/intelligent_mars_cl_centers.out
 # python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset" --sampling="intelligent" >> ~/code/temp/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them-master/output/intelligent_mars_cl_centers.out
 # python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset2" --sampling="intelligent" >> ~/code/official/output/subset2_intelligent_mars_cl_centers.out
-python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset2"  >> ~/code/temp/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them-master/output/intelligent_mars_cl_centers.out
+python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset2"  >> ~/code/official/output/subset2_random_mars_cl_centers.out
 
 
