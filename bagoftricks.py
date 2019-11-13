@@ -75,6 +75,7 @@ parser.add_argument('--name', '--model_name', type=str, default='_bot_')
 parser.add_argument('--validation-training', action='store_true', help="more useful for validation")
 parser.add_argument('--resume-training', action='store_true', help="Continue training")
 parser.add_argument('--gpu-devices', default='0,1,2', type=str, help='gpu device ids for CUDA_VISIBLE_DEVICES')
+parser.add_argument('-f', '--focus', type=str, default='map', help="map,rerank_map")
 
 args = parser.parse_args()
 
@@ -297,7 +298,18 @@ def test_rerank(model, queryloader, galleryloader, pool, use_gpu, ranks=[1, 5, 1
     for r in ranks:
         print("Rank-{:<3}: {:.1%} vs {:.1%}".format(r, cmc[r-1], re_rank_cmc[r-1]))
     print("------------------")
-    return re_rank_mAP
+    if 'mars' not in args.dataset :
+        print("Dataset not MARS : instead", args.dataset)
+        return cmc[0]
+    else:
+        if args.focus == "map":
+            print("returning map")
+            return mAP
+        else:
+            print("returning re-rank")
+            return re_rank_mAP
+
+
 
 
 
