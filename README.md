@@ -13,6 +13,17 @@ Extension of Work done for Videos
 
 
 
+## RESULTS
+
+## MODEL
+
+![model](https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.jpg)
+
+## DATASET
+
+![datatset](https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/data.jpg)
+
+
 
 ## bag of tricks   
 `args.arch = "ResNet50ta_bt"`
@@ -25,7 +36,7 @@ Extension of Work done for Videos
 
 ## hyper parameter optimization   
 
-`# python hyper_supervise_validation.py --focus="map"`       
-`# python hyper_supervise_validation.py --focus="rerank_map" `      
+`python hyper_supervise_validation.py --focus="map"`       
+`python hyper_supervise_validation.py --focus="rerank_map" `      
 `python hyper_supervise_validation.py --focus="map" --sampling="inteliigi"`      
-`# python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi"`    
+`python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi"`    
