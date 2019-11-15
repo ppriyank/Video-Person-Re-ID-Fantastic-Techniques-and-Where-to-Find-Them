@@ -37,7 +37,7 @@ parser.add_argument('--width', type=int, default=112,
                     help="width of an image (default: 112)")
 parser.add_argument('--seq-len', type=int, default=4, help="number of images to sample in a tracklet")
 # Optimization options
-parser.add_argument('--max-epoch', default=800, type=int,
+parser.add_argument('--max-epoch', default=400, type=int,
                     help="maximum epochs to run")
 parser.add_argument('--start-epoch', default=0, type=int,
                     help="manual epoch number (useful on restarts)")
@@ -76,7 +76,7 @@ parser.add_argument('--validation-training', action='store_true', help="more use
 parser.add_argument('--resume-training', action='store_true', help="Continue training")
 parser.add_argument('--gpu-devices', default='0,1,2', type=str, help='gpu device ids for CUDA_VISIBLE_DEVICES')
 parser.add_argument('-f', '--focus', type=str, default='map', help="map,rerank_map")
-parser.add_argument('-opt', type=str, default='map', help="map,rerank_map")
+parser.add_argument('-opt', '--opt', type=str, default='3', help="choose opt")
 
 args = parser.parse_args()
 
@@ -115,12 +115,13 @@ import configparser
 config = configparser.ConfigParser()
 
 
+
 if args.dataset == "mars":
     dirpath = os.getcwd() 
     opt = args.opt
     print("USING MARS CONFIG")
-    print("cl_centers.conf" , "========== " opt ,"===============")
-    config.read(dirpath + "/../tools/cl_centers.conf")        
+    print("cl_centers.conf" , "========== ", opt ,"===============")
+    config.read(dirpath + "/tools/cl_centers.conf")        
     sigma = float(config[opt]['sigma'])
     alpha =  float(config[opt]['alpha'])
     l = float(config[opt]['l'])
@@ -132,6 +133,8 @@ if args.dataset == "mars":
         batch_size = int(config[opt]['batch_size'])
     else:
         batch_size = 32
+
+
 elif args.dataset == "prid":
     print("USING PRID CONFIG")
     sigma= 0.8769823511927456
@@ -335,7 +338,7 @@ def test_rerank(model, queryloader, galleryloader, pool, use_gpu, ranks=[1, 5, 1
 
 
 args.save_dir = "/scratch/pp1953/resnet/"
-args.arch += args.name
+args.arch += args.name +"_" + str(args.opt) + "_"
 is_best = 0
 prev_best = 0 
 
@@ -345,8 +348,10 @@ if type(args.epochs_eval[0]) != int :
 print (args.arch)
 
 
+
+
 if not args.validation_training:
-    args.max_epoch = 400
+    
     print(args.epochs_eval)
     if not args.evaluate :
         for epoch in range(0, args.max_epoch):
@@ -376,7 +381,6 @@ if not args.validation_training:
 
 else:
     print("evaluation at every 10 epochs, Highly GPU/CPU expensive process, avoid running anything in Parallel")
-    args.max_epoch = 800
     factor = 10 
     print(args.epochs_eval)
     print("====")
