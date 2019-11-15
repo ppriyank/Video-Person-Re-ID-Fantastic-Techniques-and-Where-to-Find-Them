@@ -36,11 +36,11 @@ loss = ide_loss + (1 - beta_ratio)*triplet_loss + center_loss * cetner_loss_weig
 
 **PRID DATASET**   
 
-| Model            | mAP |CMC-1 | CMC-5 | CMC-20 |
+| Model            | CMC-1 | CMC-5 | CMC-20 |
 | :--------------- | ----------: | ----------: | ----------: | ----------: | 
-| SOTA       |  93.2%  | -  | -  |  -   |
+| SOTA       |  96.1%  | 99.5  | -  |  
 | Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
-| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  -  | -  | -  | -  |
+| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  -  | -  | -  | 
  
 
 
@@ -82,3 +82,4 @@ Ref:
 * STA: Spatial-Temporal Attention for Large-Scale Video-Based Person Re-Identification
 * Diversity Regularized Spatiotemporal Attention for Video-based Person Re-identification
 
+http://delivery.acm.org/10.1145/3250000/3240717/p1838-zeng.pdf?ip=216.165.95.179&id=3240717&acc=ACTIVE%20SERVICE&key=36E5A5D4E382B3FA%2E36E5A5D4E382B3FA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1573786642_2ccdc364a731b4f7e1cfd04c956762b8

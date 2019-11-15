@@ -376,7 +376,8 @@ def test_rerank(model, queryloader, galleryloader, pool, use_gpu, ranks=[1, 5, 1
     # print("Results ---------- {:.1%} ".format(distmat_rerank))
     print (parameters)
     print("Results ---------- ")
-    print("mAP: {:.1%} vs {:.1%}".format(mAP, re_rank_mAP))
+    if 'mars' in args.dataset :
+        print("mAP: {:.1%} vs {:.1%}".format(mAP, re_rank_mAP))
     print("CMC curve")
     for r in ranks:
         print("Rank-{:<3}: {:.1%} vs {:.1%}".format(r, cmc[r-1], re_rank_cmc[r-1]))
