@@ -114,11 +114,11 @@ transform_test = transforms.Compose([
 import configparser
 config = configparser.ConfigParser()
 
-
+dirpath = os.getcwd() 
+opt = args.opt
+    
 
 if args.dataset == "mars":
-    dirpath = os.getcwd() 
-    opt = args.opt
     print("USING MARS CONFIG")
     print("cl_centers.conf" , "========== ", opt ,"===============")
     config.read(dirpath + "/tools/cl_centers.conf")        
@@ -137,13 +137,19 @@ if args.dataset == "mars":
 
 elif args.dataset == "prid":
     print("USING PRID CONFIG")
-    sigma= 0.8769823511927456
-    alpha= 1.5747007053351507
-    l= 0.5241677630566622
-    margin= 0.040520629258433416
-    beta_ratio= 0.7103921571238655
-    gamma= 0.368667605025003
-    weight_decay= 0.014055481861393148
+    print("prid.conf" , "========== ", opt ,"===============")
+    config.read(dirpath + "/tools/prid.conf")        
+    sigma = float(config[opt]['sigma'])
+    alpha =  float(config[opt]['alpha'])
+    l = float(config[opt]['l'])
+    margin =  float(config[opt]['margin'])
+    beta_ratio = float(config[opt]['beta_ratio'])
+    gamma  = float(config[opt]['gamma'])
+    weight_decay = float(config[opt]['weight_decay'])
+    if 'batch_size' in config[opt]:
+        batch_size = int(config[opt]['batch_size'])
+    else:
+        batch_size = 32
 
 
 
