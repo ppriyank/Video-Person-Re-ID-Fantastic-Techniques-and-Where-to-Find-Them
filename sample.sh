@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --cpus-per-task=8
 #SBATCH --nodes=1
-#SBATCH --gres=gpu:p100:1
+#SBATCH --gres=gpu:v100:1
 #SBATCH --time=12:00:00
 #SBATCH --mem=100000
 #SBATCH --job-name=pp1953
@@ -35,3 +35,4 @@ python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_c
 # python3 config_trainer.py --focus=map --dataset=mars --opt=2 --name=_mars_cl_centers_ --cl-centers >> output/mars_cl_centers_2.out
 
 # python bagoftricks.py --pretrained-model="/beegfs/pp1953/ResNet50ta_bt_mars_cl_centers__8__checkpoint_ep181.pth.tar" -d="prid" --opt=$chikka --name="_prid_CL_CENTERS_" --validation-training --cl-centers --print-freq=10 
+# python3 config_trainer.py --focus=map --dataset=prid --opt=38 --name=_prid_cl_centers_ --cl-centers >> output/prid_cl_centers_38.out

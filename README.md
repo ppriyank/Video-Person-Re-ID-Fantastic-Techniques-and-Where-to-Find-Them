@@ -23,6 +23,10 @@ loss = ide_loss + (1 - beta_ratio)*triplet_loss + center_loss * cetner_loss_weig
 
 ### Performance
 
+   
+Use `8` configuration in `cl_centers.conf` for **MARS DATASET** and `27` and `24` configuration in `prid.conf` for **prid DATASET**
+
+
 **MARS DATASET** 
 
 | Model            | mAP (re-rank)  | CMC-1 (re-rank) | CMC-5 (re-rank)| CMC-20 (re-rank)|
@@ -62,18 +66,18 @@ MARS dataset:
 ## bag of tricks   
 `args.arch = "ResNet50ta_bt"`
 
-`python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers`  
-`python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA`  
-`python bagoftricks.py --name="_triplet_only_" --validation-training`   
-`python bagoftricks.py --name="_ilidsvid_" --validation-training`   
-`python bagoftricks.py --name="_prid_" --validation-training`   
+`python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers --opt=8`  
+`python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA --opt=8`  
+`python bagoftricks.py --name="_triplet_only_" --validation-training --opt=8`   
+`python bagoftricks.py --name="_ilidsvid_" --validation-training --opt=8`   
+`python bagoftricks.py --name="_prid_" --validation-training --opt=24`   
 
 ## hyper parameter optimization   
 
-`python hyper_supervise_validation.py --focus="map"`       
-`python hyper_supervise_validation.py --focus="rerank_map" `      
-`python hyper_supervise_validation.py --focus="map" --sampling="inteliigi"`      
-`python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi"`    
+`python hyper_supervise_validation.py --focus="map" --opt=8`       
+`python hyper_supervise_validation.py --focus="rerank_map" --opt=8`      
+`python hyper_supervise_validation.py --focus="map" --sampling="inteliigi" --opt=8`      
+`python hyper_supervise_validation.py --focus="rerank_map" --sampling="inteliigi" --opt=8`    
 
 
 
