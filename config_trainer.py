@@ -64,10 +64,11 @@ parser.add_argument('--cl-centers', action='store_true', default=False,
 parser.add_argument('-a', '--arch', type=str, default='resnet50tp', help="resnet503d, resnet50tp, resnet50ta, resnetrnn")
 parser.add_argument('--pool', type=str, default='avg', choices=['avg', 'max'])
 
+
 # Miscs
 parser.add_argument('--print-freq', type=int, default=40, help="print frequency")
 parser.add_argument('--seed', type=int, default=1, help="manual seed")
-parser.add_argument('--pretrained-model', type=str, default='/home/jiyang/Workspace/Works/video-person-reid/3dconv-person-reid/pretrained_models/resnet-50-kinetics.pth', help='need to be set for resnet3d models')
+parser.add_argument('--pretrained-model', type=str, default='', help='need to be set for resnet3d models')
 parser.add_argument('--evaluate', action='store_true', help="evaluation only")
 parser.add_argument('--save-dir', type=str, default='log')
 parser.add_argument('--epochs-eval', default=[10 * i for i in range(6,80)], type=list)
@@ -342,6 +343,27 @@ def test_rerank(model, queryloader, galleryloader, pool, use_gpu, ranks=[1, 5, 1
 
 
 
+if args.pretrained_model != '':
+    name = args.pretrained_model
+    # name = "ResNet50ta_bt2_supervised_erase_59_checkpoint_ep81.pth.tar"
+    print("loading .... " , name)
+    checkpoint = torch.load(name)
+    state_dict = {}
+    if args.dataset != "mars":
+        for key in checkpoint['state_dict']:
+            if "classifier" not in  key:
+                state_dict["module." + key] = checkpoint['state_dict'][key]
+        model.load_state_dict(state_dict,  strict=False)
+    else:
+        for key in checkpoint['state_dict']:
+            state_dict["module." + key] = checkpoint['state_dict'][key]
+        model.load_state_dict(state_dict,  strict=True)
+
+
+
+
+
+
 
 
 args.save_dir = "/scratch/pp1953/resnet/"
@@ -413,8 +435,9 @@ else:
 # python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers
 # python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA
 # python bagoftricks.py --name="_triplet_only_" --validation-training 
-# python bagoftricks.py -d "ilidsvid"  --name="_ilidsvid_" --validation-training 
-
+# python bagoftricks.py -d "ilidsvid"  --name="_ilidsvid_" --validation-training
+# python bagoftricks.py --pretrained-model="/beegfs/pp1953/ResNet50ta_bt_mars_cl_centers__8__checkpoint_ep181.pth.tar" -d="prid" --name="_prid_CL_CENTERS_" --validation-training --cl-centers --print-freq=10 
+# 
 
 
 # Epoch 1/400 avg: 9.094356
