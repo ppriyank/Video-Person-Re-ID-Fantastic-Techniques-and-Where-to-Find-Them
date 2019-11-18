@@ -30,7 +30,8 @@ cd /home/pp1953/code/official
 # python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset2" --sampling="intelligent" >> ~/code/official/output/subset2_intelligent_mars_cl_centers.out
 # python hyper_supervise_validation.py  --focus="map" --dataset="mars_subset2"  >> ~/code/official/output/subset2_random_mars_cl_centers.out
 # python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_cl_centers_ --cl-centers >>  ~/code/official/output/mars_cl_centers_$chikka.out
-python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_cl_centers_ --cl-centers >>  ~/code/official/output/mars_cl_centers_$chikka.out
+python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_attncl_centers_ --cl-centers --attn-loss >>  output/mars_attn_cl_centers_$chikka.out
+# python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_cl_centers_ --cl-centers >>  ~/code/official/output/mars_cl_centers_$chikka.out
 # python config_trainer.py --focus=map --dataset=prid --opt=$chikka --name=_prid_cl_centers_ --cl-centers >>  ~/code/official/output/prid_cl_centers_$chikka.out
 # python3 config_trainer.py --focus=map --dataset=mars --opt=2 --name=_mars_cl_centers_ --cl-centers >> output/mars_cl_centers_2.out
 

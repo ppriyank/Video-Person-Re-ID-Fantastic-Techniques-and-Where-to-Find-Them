@@ -80,6 +80,7 @@ parser.add_argument('--resume-training', action='store_true', help="Continue tra
 parser.add_argument('--gpu-devices', default='0,1,2', type=str, help='gpu device ids for CUDA_VISIBLE_DEVICES')
 parser.add_argument('-f', '--focus', type=str, default='map', help="map,rerank_map")
 parser.add_argument('-opt', '--opt', type=str, default='3', help="choose opt")
+parser.add_argument('-s', '--sampling', type=str, default='random', help="choose sampling for training")
 
 args = parser.parse_args()
 
@@ -125,7 +126,7 @@ if args.dataset == "mars":
     print("USING MARS CONFIG")
     if args.attn_loss:
         print("val.conf" , "========== ", opt ,"===============")
-        config.read(dirpath + "tools/val.conf") 
+        config.read(dirpath + "/tools/val.conf") 
     else:
         print("cl_centers.conf" , "========== ", opt ,"===============")
         config.read(dirpath + "/tools/cl_centers.conf")        
@@ -491,22 +492,7 @@ else:
                         }, is_best, osp.join(args.save_dir, args.arch + '_checkpoint_ep' + str(epoch+1) + '.pth.tar'))                
 
 
-# python bagoftricks.py -d="prid" --name="_prid_CL_CENTERS_" --validation-training --cl-centers --print-freq=10
-# python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers
-# python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA
-# python bagoftricks.py --name="_triplet_only_" --validation-training 
-# python bagoftricks.py -d "ilidsvid"  --name="_ilidsvid_" --validation-training
-# python bagoftricks.py --pretrained-model="/beegfs/pp1953/ResNet50ta_bt_mars_cl_centers__8__checkpoint_ep181.pth.tar" -d="prid" --name="_prid_CL_CENTERS_" --validation-training --cl-centers --print-freq=10 
-# 
 
-
-# Epoch 1/400 avg: 9.094356
-# Epoch 2/400 avg: 8.753730
-# Epoch 3/400 avg: 8.368683
-# Epoch 4/400 avg: 7.851416
-# Epoch 5/400 avg: 7.298941
-# Epoch 6/400 avg: 6.812719
-# Epoch 7/400 avg: 6.438450
-# Epoch 8/400 avg: 5.961805
+# python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_attncl_centers_ --cl-centers --attn-loss >>  output/mars_attn_cl_centers_$chikka.out
 
 
