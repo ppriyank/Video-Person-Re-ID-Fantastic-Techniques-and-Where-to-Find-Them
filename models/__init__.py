@@ -6,6 +6,7 @@ __factory = {
     'resnet50tp': ResNet50TP,
     'resnet50ta': ResNet50TA,
     'ResNet50ta_bt': ResNet50TA_BT,
+    'ResNet50ta_bt2': ResNet50TA_BT2,
 }
 
 def get_names():

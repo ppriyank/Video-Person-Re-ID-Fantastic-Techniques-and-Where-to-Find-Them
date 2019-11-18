@@ -312,3 +312,70 @@ class VideoDataset_synch(Dataset):
 
 
 
+
+
+
+from tools.transforms2 import RandomErasing3
+
+
+class VideoDataset_inderase(Dataset):
+    """Video Person ReID Dataset.
+    Note batch data has shape (batch, seq_len, channel, height, width).
+    """
+    sample_methods = ['evenly', 'random', 'all']
+
+    def __init__(self, dataset, seq_len=15, sample='evenly', transform=None , max_length=40):
+        self.dataset = dataset
+        self.seq_len = seq_len
+        self.sample = sample
+        self.transform = transform
+        self.max_length = max_length
+        self.erase = RandomErasing3(probability=0.5, mean=[0.485, 0.456, 0.406])
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, index):
+        img_paths, pid, camid = self.dataset[index]
+        num = len(img_paths)
+        if self.sample != "intelligent":
+            frame_indices = range(num)
+            rand_end = max(0, len(frame_indices) - self.seq_len - 1)
+            begin_index = random.randint(0, rand_end)
+            end_index = min(begin_index + self.seq_len, len(frame_indices))
+
+            indices = frame_indices[begin_index:end_index]
+
+            for index in indices:
+                if len(indices) >= self.seq_len:
+                    break
+                indices.append(index)
+            indices=np.array(indices)
+        else:
+            # frame_indices = range(num)
+            indices = []
+            each = max(num//self.seq_len,1)
+            for  i in range(self.seq_len):
+                if i != self.seq_len -1:
+                    indices.append(random.randint(min(i*each , num-1), min( (i+1)*each-1, num-1)) )
+                else:
+                    indices.append(random.randint(min(i*each , num-1), num-1) )
+            # print(len(indices), indices, num )
+        imgs = []
+        labels = []
+        for index in indices:
+            index=int(index)
+            img_path = img_paths[index]
+            img = read_image(img_path)
+            if self.transform is not None:
+                img = self.transform(img)
+            img , temp  = self.erase(img)
+            labels.append(temp)
+            img = img.unsqueeze(0)
+            imgs.append(img)
+        labels = torch.tensor(labels)
+        imgs = torch.cat(imgs, dim=0)
+        #imgs=imgs.permute(1,0,2,3)
+        return imgs, pid, camid , labels
+
+        

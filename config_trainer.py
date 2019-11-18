@@ -23,7 +23,7 @@ from tools.scheduler import WarmupMultiStepLR
 from tools.utils import AverageMeter, Logger, save_checkpoint , resume_from_checkpoint
 from tools.eval_metrics import evaluate
 from tools.samplers import RandomIdentitySampler
-from tools.video_loader import VideoDataset 
+from tools.video_loader import VideoDataset , VideoDataset_inderase
 import tools.data_manager as data_manager
 
 parser = argparse.ArgumentParser(description='Train video model with cross entropy loss')
@@ -59,6 +59,8 @@ parser.add_argument('--use-OSMCAA', action='store_true', default=False,
                     help="Use OSM CAA loss in addition to triplet")
 parser.add_argument('--cl-centers', action='store_true', default=False,
                     help="Use cl centers verison of OSM CAA loss")
+parser.add_argument('--attn-loss', action='store_true', default=False,
+                    help="Use attention loss")
 
 # Architecture
 parser.add_argument('-a', '--arch', type=str, default='resnet50tp', help="resnet503d, resnet50tp, resnet50ta, resnetrnn")
@@ -121,8 +123,13 @@ opt = args.opt
 
 if args.dataset == "mars":
     print("USING MARS CONFIG")
-    print("cl_centers.conf" , "========== ", opt ,"===============")
-    config.read(dirpath + "/tools/cl_centers.conf")        
+    if args.attn_loss:
+        print("val.conf" , "========== ", opt ,"===============")
+        config.read(dirpath + "tools/val.conf") 
+    else:
+        print("cl_centers.conf" , "========== ", opt ,"===============")
+        config.read(dirpath + "/tools/cl_centers.conf")        
+    
     sigma = float(config[opt]['sigma'])
     alpha =  float(config[opt]['alpha'])
     l = float(config[opt]['l'])
@@ -153,14 +160,22 @@ elif args.dataset == "prid":
         batch_size = 32
 
 
-
-
-trainloader = DataLoader(
-    VideoDataset(dataset.train, seq_len=args.seq_len, sample='random',transform=transform_train),
-    sampler=RandomIdentitySampler(dataset.train, num_instances=args.num_instances),
-    batch_size=args.train_batch, num_workers=args.workers,
-    pin_memory=pin_memory, drop_last=True,
-)
+if args.attn_loss:
+    trainloader = DataLoader(
+        VideoDataset_inderase(dataset.train, seq_len=args.seq_len, sample=args.sampling,transform=transform_train),
+        sampler=RandomIdentitySampler(dataset.train, num_instances=args.num_instances),
+        batch_size=args.train_batch, num_workers=args.workers,
+        pin_memory=pin_memory, drop_last=True,
+    )
+    args.arch = "ResNet50ta_bt2"
+else:
+    trainloader = DataLoader(
+        VideoDataset(dataset.train, seq_len=args.seq_len, sample='random',transform=transform_train),
+        sampler=RandomIdentitySampler(dataset.train, num_instances=args.num_instances),
+        batch_size=args.train_batch, num_workers=args.workers,
+        pin_memory=pin_memory, drop_last=True,
+    )
+    args.arch = "ResNet50ta_bt"
 
 queryloader = DataLoader(
     VideoDataset(dataset.query, seq_len=args.seq_len, sample='dense', transform=transform_test),
@@ -177,7 +192,7 @@ galleryloader = DataLoader(
 
 
 
-args.arch = "ResNet50ta_bt"
+
 model = models.init_model(name=args.arch, num_classes=dataset.num_train_pids, loss={'xent', 'htri'})
 print("Model size: {:.5f}M".format(sum(p.numel() for p in model.parameters())/1000000.0))
 
@@ -220,7 +235,7 @@ if use_gpu:
 best_rank1 = -np.inf
 
 
-def train(model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu , optimizer_center , criterion_center_loss , criterion_osm_caa=None):
+def normal_train(model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu , optimizer_center , criterion_center_loss , criterion_osm_caa=None):
     model.train()
     losses = AverageMeter()
     cetner_loss_weight = 0.0005
@@ -259,7 +274,49 @@ def train(model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu
             else:
                 print("Batch {}/{}\t TripletLoss  ({:.6f}) Total Loss {:.6f} ({:.6f})  ".format(batch_idx+1, len(trainloader) ,triplet_loss.item(),losses.val, losses.avg))        
         
+
+def train_attn(model, criterion_xent, criterion_htri, optimizer, trainloader, use_gpu , optimizer_center , criterion_center_loss , criterion_osm_caa=None):
+    model.train()
+    losses = AverageMeter()
+    cetner_loss_weight = 0.0005
+    for batch_idx, (imgs, pids, _, labels) in enumerate(trainloader):
+        # print(batch_idx)
+        if use_gpu:
+            imgs, pids  , labels = imgs.cuda(), pids.cuda() , labels.cuda().float()
+            # 32,4,3,224,112 , 32
+        imgs, pids = Variable(imgs), Variable(pids)
+        outputs, features , a_vals = model(imgs)
+        ide_loss = criterion_xent(outputs , pids)
+        triplet_loss = criterion_htri(features, features, features, pids, pids, pids)
+        center_loss = criterion_center_loss(features, pids)
+        attn_noise  = a_vals * labels
+        attn_loss = attn_noise.sum(1).mean()
+        if args.use_OSMCAA:
+            if use_gpu:
+                osm_caa_loss = criterion_osm_caa(features, pids , model.module.classifier.classifier.weight.t())         
+            else:
+                osm_caa_loss = criterion_osm_caa(features, pids , model.classifier.classifier.weight.t()) 
+            loss = ide_loss + (1-beta_ratio )* triplet_loss  + center_loss * cetner_loss_weight + beta_ratio * osm_caa_loss + attn_loss
+        elif args.cl_centers : 
+            osm_caa_loss = criterion_osm_caa(features, pids , criterion_center_loss.centers.t()) 
+            loss = ide_loss + (1-beta_ratio )* triplet_loss  + center_loss * cetner_loss_weight + beta_ratio * osm_caa_loss + attn_loss
+        else:
+            loss = ide_loss + triplet_loss  + center_loss * cetner_loss_weight + attn_loss
+        optimizer.zero_grad()
+        optimizer_center.zero_grad()
+        loss.backward()
+        optimizer.step()
+        for param in criterion_center_loss.parameters():
+            param.grad.data *= (1./cetner_loss_weight)
+        optimizer_center.step()
+        losses.update(loss.data.item(), pids.size(0))
+        if (batch_idx+1) % args.print_freq == 0:
+            if args.use_OSMCAA or args.cl_centers:
+                print("Batch {}/{}\t Attn Loss  ({:.6f}) TripletLoss  ({:.6f}) OSM Loss: ({:.6f}) Total Loss {:.6f} ({:.6f})  ".format(batch_idx+1, len(trainloader), attn_loss.item() ,triplet_loss.item(), osm_caa_loss.item() ,losses.val, losses.avg))        
+            else:
+                print("Batch {}/{}\t Attn Loss  ({:.6f}) TripletLoss  ({:.6f}) Total Loss {:.6f} ({:.6f})  ".format(batch_idx+1, len(trainloader),attn_loss.item() ,triplet_loss.item(),losses.val, losses.avg))        
         
+                
         
 
 
@@ -377,7 +434,10 @@ if type(args.epochs_eval[0]) != int :
 print (args.arch)
 
 
-
+if args.attn_loss:
+    train = train_attn
+else:
+    train = normal_train
 
 if not args.validation_training:
     
