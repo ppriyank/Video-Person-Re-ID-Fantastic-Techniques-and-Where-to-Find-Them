@@ -7,13 +7,19 @@ Official Pytorch Implementation of the paper:
 
 
 Extension of Work done for Videos 
-* [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID)
-* [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline)
-* [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch)
+* [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID) [paper](https://arxiv.org/pdf/1805.02104.pdf)
+* [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline)[paper](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf) 
+* [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch)[paper](https://arxiv.org/pdf/1811.01459v2.pdf)
 
+## MODEL
+
+<img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.png" width="900">
 
 
 ## RESULTS
+
+
+
 
 ### LOSS
 
@@ -50,11 +56,6 @@ Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET**
  
 
 
-## MODEL
-
-<img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.png" width="900">
-
-
 ## DATASET
 
 MARS dataset: 
@@ -87,5 +88,3 @@ Ref:
 
 [1] STA:  Spatial-Temporal Attention for Large-Scale Video-based Person Re-Identification  
 [2] Person Re-identification with Hierarchical Deep Learning Feature and efficient XQDA Metric
-
-http://delivery.acm.org/10.1145/3250000/3240717/p1838-zeng.pdf?ip=216.165.95.179&id=3240717&acc=ACTIVE%20SERVICE&key=36E5A5D4E382B3FA%2E36E5A5D4E382B3FA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1573786642_2ccdc364a731b4f7e1cfd04c956762b8
