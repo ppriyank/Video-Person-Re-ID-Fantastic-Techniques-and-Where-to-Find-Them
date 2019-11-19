@@ -43,7 +43,7 @@ Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET**
 | Baseline + BOT    |    81.3 (88.4) | 87.1 (87.6) | 95.9 (96.0) | 98.2 (98.4) |
 |  Baseline + BOT + OSM Loss    |  |   |   |   |
 | (Proposed) Baseline + BOT + OSM Loss + CL Centers    |  82(88.1)  | 87.3(87.3)  | 96.2(95.8)  | 97.9(98.4) |
-| (Proposed) B-BOT + Attn-CL loss    | 82.9(87.8)   | 88.6(88.0)  | 96.2(95.4)  | 98.0(98.3) |
+| (Proposed) B-BOT + Attn-CL loss    | **82.9**(87.8)   | **88.6**(88.0)  | 96.2(95.4)  | 98.0(98.3) |
 
 
 **PRID DATASET**   
@@ -63,17 +63,36 @@ MARS dataset:
 <img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/data.jpg" width="400">
 
 
+## MARS Dataset configuration
+
+### OSM LOSS hyper paramters
+* sigma =  0.9047814732165316
+* alpha =  2.8436551583293728
+* l =  0.5873389293193368
+
+### Triplet loss
+
+* margin =  4.4132437486402204e-05
+
+### Triplet loss
+* beta_ratio =  1.0 (only osm loss used)
+
+### Optimizaer hyperparameters
+* gamma =  0.3282654557691594
+* weight_decay = 0.0005
 
 
 
 ## bag of tricks   
-`args.arch = "ResNet50ta_bt"`
+normal architecrture : `args.arch = "ResNet50ta_bt"`    
+for attention loss :  `args.arch = "ResNet50ta_bt2"`    
 
 `python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers --opt=8`  
 `python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA --opt=8`  
 `python bagoftricks.py --name="_triplet_only_" --validation-training --opt=8`   
 `python bagoftricks.py --name="_ilidsvid_" --validation-training --opt=8`   
 `python bagoftricks.py --name="_prid_" --validation-training --opt=24`   
+`python config_trainer.py --focus=map --dataset=mars --opt=59 --name=_mars_attncl_centers_ --cl-centers --attn-loss`
 
 ## hyper parameter optimization   
 
