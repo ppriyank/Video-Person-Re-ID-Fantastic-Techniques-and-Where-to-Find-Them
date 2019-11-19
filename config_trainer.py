@@ -494,5 +494,6 @@ else:
 
 
 # python config_trainer.py --focus=map --dataset=mars --opt=$chikka --name=_mars_attncl_centers_ --cl-centers --attn-loss >>  output/mars_attn_cl_centers_$chikka.out
+# python3 config_trainer.py --focus=map --dataset=mars --opt= --name=_mars_osm_ --use-OSMCAA >>  output/mars_osm_.out
 
 
