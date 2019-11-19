@@ -7,9 +7,9 @@ Official Pytorch Implementation of the paper:
 
 
 Extension of Work done for Videos 
-* [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID) [paper](https://arxiv.org/pdf/1805.02104.pdf)
-* [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline)[paper](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf) 
-* [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch)[paper](https://arxiv.org/pdf/1811.01459v2.pdf)
+* [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID) || [paper](https://arxiv.org/pdf/1805.02104.pdf)
+* [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline) || [paper](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf) 
+* [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch) || [paper](https://arxiv.org/pdf/1811.01459v2.pdf)
 
 ## MODEL
 
@@ -49,7 +49,7 @@ Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET**
 **PRID DATASET**   
 
 | Model            | CMC-1 | CMC-5 | CMC-20 |
-| :--------------- | ----------: | ----------: | ----------: | ----------: | 
+| :--------------- | ----------: | ----------: | ----------: |
 | SOTA  (Zeng, Tian, and Wu)[2]     |  96.1%  | 99.5  | -  |  
 | Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
 | Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  96.6  | 100  | 100  | 
