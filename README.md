@@ -18,39 +18,41 @@ Extension of Work done for Videos
 ### LOSS
 
 ```
-loss = ide_loss + (1 - beta_ratio)*triplet_loss + center_loss * cetner_loss_weight + beta_ratio * osm_caa_loss
+loss = ide_loss + (1 - beta_ratio)*triplet_loss + center_loss * cetner_loss_weight + beta_ratio * osm_caa_loss + attention_loss
 ```
 
 ### Performance
 
    
-Use `8` configuration in `cl_centers.conf` for **MARS DATASET** and `27` and `24` configuration in `prid.conf` for **prid DATASET**
+Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET** and `27` and `24` configuration in `prid.conf` for **prid DATASET**
 
 
 **MARS DATASET** 
 
 | Model            | mAP (re-rank)  | CMC-1 (re-rank) | CMC-5 (re-rank)| CMC-20 (re-rank)|
 | :--------------- | -------------: | -------------: | -------------: | ------------: | 
-| SOTA (w/o re-rank)      |   80.8  | 86.3 | 95.7 | 98.1   |
-| SOTA (w/o re-rank)    |   87.7  | 87.2 | 96.2 | 98.6 |
+| SOTA (w/o re-rank) (Fu et al.)[1]     |   81.2 (-)  | 86.2 (-) | 95.7 (-) |  - (-)   |
+| SOTA (with re-rank) (Fu et al.)[1]   |   80.8 (87.7)  | 86.3(87.2) | 95.7(96.2) | 98.1(98.6) |
 | Baseline     |  76.7 (84.5) | 83.3 (85.0) | 93.8 (94.7) | 97.4 (97.7)|
 | Baseline + BOT    |    81.3 (88.4) | 87.1 (87.6) | 95.9 (96.0) | 98.2 (98.4) |
-| Baseline + BOT + OSM Loss    |  |   |   |   |
-| Baseline + BOT + OSM Loss + CL Centers    |    |   |   |  |
+|  Baseline + BOT + OSM Loss    |  |   |   |   |
+| (Proposed) Baseline + BOT + OSM Loss + CL Centers    |  82(88.1)  | 87.3(87.3)  | 96.2(95.8)  | 97.9(98.4) |
+| (Proposed) B-BOT + Attn-CL loss    | 82.9(87.8)   | 88.6(88.0)  | 96.2(95.4)  | 98.0(98.3) |
+
 
 **PRID DATASET**   
 
 | Model            | CMC-1 | CMC-5 | CMC-20 |
 | :--------------- | ----------: | ----------: | ----------: | ----------: | 
-| SOTA       |  96.1%  | 99.5  | -  |  
+| SOTA  (Zeng, Tian, and Wu)[2]     |  96.1%  | 99.5  | -  |  
 | Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
-| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  -  | -  | -  | 
+| Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  96.6  | 100  | 100  | 
  
 
 
 ## MODEL
 
-<img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.jpg" width="900">
+<img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.png" width="900">
 
 
 ## DATASET
@@ -83,7 +85,7 @@ MARS dataset:
 
 Ref: 
 
-* STA: Spatial-Temporal Attention for Large-Scale Video-Based Person Re-Identification
-* Diversity Regularized Spatiotemporal Attention for Video-based Person Re-identification
+[1] STA:  Spatial-Temporal Attention for Large-Scale Video-based Person Re-Identification  
+[2] Person Re-identification with Hierarchical Deep Learning Feature and efficient XQDA Metric
 
 http://delivery.acm.org/10.1145/3250000/3240717/p1838-zeng.pdf?ip=216.165.95.179&id=3240717&acc=ACTIVE%20SERVICE&key=36E5A5D4E382B3FA%2E36E5A5D4E382B3FA%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1573786642_2ccdc364a731b4f7e1cfd04c956762b8
