@@ -63,7 +63,7 @@ MARS dataset:
 <img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/data.jpg" width="400">
 
 
-## MARS Dataset configuration
+## MARS Dataset configuration (59th)
 
 ### OSM LOSS hyper paramters
 * sigma =  0.9047814732165316
@@ -74,7 +74,7 @@ MARS dataset:
 
 * margin =  4.4132437486402204e-05
 
-### Triplet loss
+### (1 - beta_ratio) x Triplet_Loss + (beta_ratio) x OSM_Loss  
 * beta_ratio =  1.0 (only osm loss used)
 
 ### Optimizaer hyperparameters
@@ -85,7 +85,7 @@ MARS dataset:
 
 ## bag of tricks   
 normal architecrture : `args.arch = "ResNet50ta_bt"`    
-for attention loss :  `args.arch = "ResNet50ta_bt2"`    
+For attention loss :  `args.arch = "ResNet50ta_bt2"`    
 
 `python bagoftricks.py --name="_CL_CENTERS_" --validation-training --cl-centers --opt=8`  
 `python bagoftricks.py --name="_triplet_OSM_only_" --validation-training --use-OSMCAA --opt=8`  
