@@ -128,8 +128,10 @@ if args.dataset == "mars":
         print("val.conf" , "========== ", opt ,"===============")
         config.read(dirpath + "/tools/val.conf") 
     else:
-        print("cl_centers.conf" , "========== ", opt ,"===============")
-        config.read(dirpath + "/tools/cl_centers.conf")        
+        print("val.conf" , "========== ", opt ,"===============")
+        config.read(dirpath + "/tools/val.conf") 
+        # print("cl_centers.conf" , "========== ", opt ,"===============")
+        # config.read(dirpath + "/tools/cl_centers.conf")        
     
     sigma = float(config[opt]['sigma'])
     alpha =  float(config[opt]['alpha'])
