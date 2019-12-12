@@ -2,9 +2,18 @@
 Official Pytorch Implementation of the paper:  
 **Video Person Re-ID: Fantastic Techniques and Where to Find Them** *(Submitted in AAAI'20)*  
 *Priyank Pathak,  Amir Erfan Eshratifar,  Michael Gormish*   
-*(Work done in collaboration of NYU and Clarifai)*
-
-
+*(Work done in collaboration of NYU and Clarifai)*    
+If you find this useful, feel free to cite this
+```
+@misc{pathak2019video,
+    title={Video Person Re-ID: Fantastic Techniques and Where to Find Them},
+    author={Priyank Pathak and Amir Erfan Eshratifar and Michael Gormish},
+    year={2019},
+    eprint={1912.05295},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV}
+}
+```
 
 Extension of Work done for Videos 
 * [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID) || [paper](https://arxiv.org/pdf/1805.02104.pdf)
