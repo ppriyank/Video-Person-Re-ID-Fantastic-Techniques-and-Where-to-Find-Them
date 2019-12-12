@@ -50,8 +50,8 @@ Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET**
 | SOTA (with re-rank) (Fu et al.)[1]   |   80.8 (87.7)  | 86.3(87.2) | 95.7(96.2) | 98.1(98.6) |
 | Baseline     |  76.7 (84.5) | 83.3 (85.0) | 93.8 (94.7) | 97.4 (97.7)|
 | Baseline + BOT    |    81.3 (88.4) | 87.1 (87.6) | 95.9 (96.0) | 98.2 (98.4) |
-|  Baseline + BOT + OSM Loss    |  |   |   |   |
-| (Proposed) Baseline + BOT + OSM Loss + CL Centers    |  82(88.1)  | 87.3(87.3)  | 96.2(95.8)  | 97.9(98.4) |
+|  Baseline + BOT + OSM Loss    | 82.4 (88.1) |  87.9 (87.6) | 96.0 (95.7)  | 98.0 (98.5)  |
+| (Proposed) Baseline + BOT + OSM Loss + CL Centers    |  81.2 **(88.5)**  | 86.3 **(88.0)**  | 95.6 (96.1)  | **98.2** (98.5) |
 | (Proposed) B-BOT + Attn-CL loss    | **82.9**(87.8)   | **88.6**(88.0)  | 96.2(95.4)  | 98.0(98.3) |
 
 
