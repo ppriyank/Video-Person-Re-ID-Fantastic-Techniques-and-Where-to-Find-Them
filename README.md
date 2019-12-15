@@ -60,7 +60,7 @@ Use `59` configuration in `cl_centers.conf` and `vals.conf` for **MARS DATASET**
 | Model            | CMC-1 | CMC-5 | CMC-20 |
 | :--------------- | ----------: | ----------: | ----------: |
 | SOTA  (Zeng, Tian, and Wu)[2]     |  96.1%  | 99.5  | -  |  
-| Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  88.8 | 97.8  | 100.0 |
+| Baseline + BOT + OSM Loss + CL Centers    |  93.1  |  98.9  | 100.0 |
 | Baseline + BOT + OSM Loss + CL Centers (pretrained on MARS)   |  96.6  | 100  | 100  | 
  
 
