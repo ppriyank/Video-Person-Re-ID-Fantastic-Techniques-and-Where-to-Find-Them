@@ -3,7 +3,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/video-person-re-id-fantastic-techniques-and/person-re-identification-on-prid2011)](https://paperswithcode.com/sota/person-re-identification-on-prid2011?p=video-person-re-id-fantastic-techniques-and)
 
 # Video Person Re-ID: Fantastic Techniques and Where to Find Them
-Official Pytorch Implementation of the paper:  
+Official Pytorch Implementation of the paper: [Paper](https://arxiv.org/pdf/1912.05295.pdf)   
 **Video Person Re-ID: Fantastic Techniques and Where to Find Them** *(Accepted in AAAI'20)*  
 *Priyank Pathak,  Amir Erfan Eshratifar,  Michael Gormish*   
 *(Work done in collaboration of NYU and Clarifai)*    
