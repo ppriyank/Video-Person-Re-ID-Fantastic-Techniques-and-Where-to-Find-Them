@@ -24,6 +24,11 @@ Extension of Work done for Videos
 * [Bag of Tricks and A Strong ReID Baseline](https://github.com/michuanhaohao/reid-strong-baseline) || [paper](http://openaccess.thecvf.com/content_CVPRW_2019/papers/TRMTMCT/Luo_Bag_of_Tricks_and_a_Strong_Baseline_for_Deep_Person_CVPRW_2019_paper.pdf) 
 * [Online-Soft-Mining-and-Class-Aware-Attention](https://github.com/ppriyank/-Online-Soft-Mining-and-Class-Aware-Attention-Pytorch) || [paper](https://arxiv.org/pdf/1811.01459v2.pdf)
 
+
+## Specifications  
+Pytorch == 1.3.0  
+Python3   
+
 ## MODEL
 
 <img src="https://github.com/ppriyank/Video-Person-Re-ID-Fantastic-Techniques-and-Where-to-Find-Them/blob/master/images/diag.png" width="900">
