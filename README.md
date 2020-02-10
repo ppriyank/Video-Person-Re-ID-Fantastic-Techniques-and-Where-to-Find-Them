@@ -100,6 +100,9 @@ MARS dataset:
 * weight_decay = 0.0005
 
 
+## NOTE 
+Change the dataset path in `tools/data_manager.py` line 21 : `storage_dir = "/beegfs/pp1953/"`    
+(apologies for the inconvenience)
 
 ## bag of tricks   
 normal architecrture : `args.arch = "ResNet50ta_bt"`    
