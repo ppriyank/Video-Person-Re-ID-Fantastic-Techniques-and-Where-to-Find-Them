@@ -18,6 +18,9 @@ If you find this useful, feel free to cite this
     primaryClass={cs.CV}
 }
 ```
+# [Update] Further worked (not published): Fine-Grained Re-Identification [github](https://github.com/ppriyank/Fine-grained-Re-Identification) || [paper](https://arxiv.org/pdf/2011.13475.pdf)
+
+
 
 Extension of Work done for Videos 
 * [Revisiting Temporal Modeling for Video-based Person ReID](https://github.com/jiyanggao/Video-Person-ReID) || [paper](https://arxiv.org/pdf/1805.02104.pdf)
